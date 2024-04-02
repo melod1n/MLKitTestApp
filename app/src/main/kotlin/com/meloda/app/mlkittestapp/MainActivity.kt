@@ -109,6 +109,7 @@ class MainActivity : ComponentActivity() {
                                             ).show()
                                         } else {
                                             cameraEnabled = true
+                                            latestResult = null
                                         }
                                     },
                                     modifier = Modifier.weight(1f)
@@ -199,10 +200,17 @@ class MainActivity : ComponentActivity() {
                 }
 
                 else -> {
+                    val unsupportedTypeText = "Unsupported type: $type; result: ${barcode.rawValue}"
+
                     Log.e(
                         "StartCamera",
                         "StartCamera: unsupported type: $type; result: ${barcode.rawValue}"
                     )
+
+                    cameraProvider?.unbindAll()
+                    cameraProvider = null
+
+                    onResult(unsupportedTypeText)
                 }
             }
 
