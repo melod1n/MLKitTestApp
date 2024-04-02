@@ -210,7 +210,7 @@ class MainActivity : ComponentActivity() {
         }
 
         val imageAnalyzer = ImageAnalysis.Builder()
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_BLOCK_PRODUCER)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
             .also {
                 it.setAnalyzer(cameraExecutor, analyzer)
